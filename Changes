@@ -1,0 +1,28 @@
+Revision history for IkiWiki-Plugin-syntax
+
+0.9 Tue Nov 14 12:00:52 CET 2006
+    - Add a force_subpage parameter for link build
+    - Fix a bug in syntax page link
+    - Documented a bug with markdown indented text
+
+0.8 Tue Nov 14 08:54:13 CET 2006
+    - Minor corrections on file dependencies
+
+0.6 Fri Oct 20 11:49:32 CEST 2006
+    - Added a line number parameter
+
+0.5 Thu Oct 19 10:23:11 CEST 2006
+    - Source module convert to UTF-8 charset.
+
+0.4 Thu Oct 18 14:00:10 CEST 2006
+    - First debianized version
+
+0.3 Wed Oct 18 10:32:57 CEST 2006
+    Now reusing an global Text::VimColor object
+    
+0.2  Tue Oct 17 16:41:02 CEST 2006
+    Added documentation to the main module.
+
+0.1  Tue Oct 17 12:41:41 2006
+    Initial release.
+

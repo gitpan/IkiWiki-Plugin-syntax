@@ -1,0 +1,45 @@
+IkiWiki-Plugin-syntax version 0.20
+
+Plugin for the ikiwiki program that add source highlight capabilities using
+third party modules. 
+
+The plugin can use Text::VimColor or Syntax::Hightlight::Engine::Kate. In
+absence of anyone of the two it uses a simple engine included in the package. 
+
+CONFIGURATION
+
+The plugin adds the following new parameters to the ikiwiki setup:
+
+TEMPLATES
+
+The package install two templates: syntax.tmpl and syntax_info.tmpl. The first
+is used for build a HTML paragraph with the syntax highglighted source more a
+title and a description field.
+
+The second is used for build a table with the features found in the third
+party engine used. 
+
+Also, the module provides a CSS stylesheet file for merge with the site global
+stylesheet if the administrator wants.
+
+INSTALLATION
+
+To install this module, run the following commands:
+
+    perl Build.PL
+    ./Build
+    ./Build test
+    ./Build install
+
+
+DEPENDENCIES
+
+- Text::VimColor
+- Vim editor 
+
+COPYRIGHT AND LICENCE
+
+Copyright (C) 2008, "Víctor Moral"
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
