@@ -1,3 +1,15 @@
+ikiwiki-plugin-syntax (0.21) unstable; urgency=high
+
+  * Add a new test for check direct calls to the plugin functions.
+  * Fix a fatal bug in the preprocess function. It always returns a exception.
+  * Fix a bug in the detect language mechanism.
+  * Add a empty parameter in the first call to gettext. 
+  * The preprocess function can change the engine at runtime. Not documented
+    parameter yet.
+  * Fixed a bug in the templates.
+
+ -- Victor Moral <victor@taquiones.net>  Thu, 03 Apr 2008 10:31:03 +0200
+
 ikiwiki-plugin-syntax (0.20) unstable; urgency=low
 
   * New features:

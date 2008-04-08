@@ -131,10 +131,14 @@ sub detect_language {
             content     =>  undef,
             @_ );
 
-    if (defined $params{proposed} and 
-        $self->can_syntax_from( proposed => $params{proposed})) {
-        $self->language( $self->detect() || $params{proposed} );
-        return 1;
+    if (defined $params{proposed}) {
+        if ($self->can_syntax_from( proposed => $params{proposed})) {
+            $self->language( $self->detect() || $params{proposed} );
+            return 1;
+        }
+        elsif ($self->can_auto_detect()) {
+            $self->language( q(Auto) );
+        }
     }
 
     if (defined $params{filename} and 
@@ -183,7 +187,7 @@ sub fail_response {
         $error_msg = gettext(q(unknown exception));
     }
     elsif (ref($fail)) {
-        $error_msg = $fail->fullmessage();
+        $error_msg = $fail->full_message();
     }
     else {
         $error_msg = $fail;
@@ -312,15 +316,16 @@ sub to_number_lines {
 
     ## avoid renumber the text
     if (not $self->match_css('line_number', $self->htmlized())) {
-        # if we haven't a first line number set to first        
+        # if we haven't a first line number set to first 
         if (not $counter  =~ m{^\d+}xms) {
             $counter = 1;
         }
 
         #   Wrap every line with special class
         foreach my $line ($self->_split_htmlized()) {
-            #   add a line number
-            push @numered, $self->css('line_number', sprintf '%5u', $counter++ ) . $line ;
+            #   add a formated line number and a indent space
+            push @numered, $self->css('line_number', sprintf '%5u', $counter++ ) 
+                            . '  ' . $line ;
         }
 
         # save the result in the htmlized field

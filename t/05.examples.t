@@ -14,11 +14,14 @@ use IkiWiki q(2.0);
 use IO::File;
 use HTML::Template;
 
-my $examples_dir = q(examples);
+my $examples_dir = q(examples/sources);
 my %examples = (
     'sarajevo.conf'         =>  'conf',
     'smart_comments.pl'     =>  'perl',
     'page.tmpl'             =>  'html',
+    'function.pl'           =>  'perl',
+    'bash.sh'               =>  'bash',
+    'fragment.html'         =>  'html',
 );
 my @engines = MyTestTools::Engines();
 my %options = (
@@ -82,7 +85,7 @@ foreach my $page (keys %examples) {
     } ## foreach engines
 } ## foreach pages
 
-my $final = HTML::Template->new( filename => q(examples/page.tmpl), no_includes => 1 );
+my $final = HTML::Template->new( filename => q(examples/sources/page.tmpl), no_includes => 1 );
 
 $final->param( title => q(Examples page for IkiWiki::Plugin::syntax),
                results => [ _get_output() ],

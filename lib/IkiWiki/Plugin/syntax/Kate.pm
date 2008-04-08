@@ -14,7 +14,7 @@ my  %substitutions  =   (
     "&"     => "&amp;",
     " "     => "&nbsp;",
     "\t"    => "&nbsp;" x 4,    
-    "\n"    => "<BR>\n",
+    "\n"    => "\n",
 );
 my  %format_table   =   (
     Alert           => 'synError',
@@ -78,6 +78,8 @@ sub parse_and_html {
     my  $kate   =   $self->_engine();
 
     if ($kate) {
+        no warnings;
+
         $self->htmlized( $kate->highlightText( $self->source() ) );
     }
 
@@ -95,7 +97,7 @@ sub can_syntax_from {
 
         # try a direct search
         foreach my $lang (@languages) {
-            if ($lang eq uc($value)) {
+            if (uc $lang eq uc $value) {
                 $self->detect( $lang );
                 return 1;
             }

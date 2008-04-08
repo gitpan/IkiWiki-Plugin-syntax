@@ -1,6 +1,6 @@
 ---
 name: IkiWiki-Plugin-syntax
-version: 0.20
+version: 0.21
 author:
   - '"Victor Moral" <victor@taquiones.net>'
 abstract: Add syntax highlighting to ikiwiki

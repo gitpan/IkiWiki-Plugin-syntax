@@ -3,8 +3,8 @@ package IkiWiki::Plugin::syntax;
 use warnings;
 use strict;
 use Carp;
-
 use utf8;
+use Data::Dumper;
 
 use IkiWiki;
 use IkiWiki::Plugin::syntax::gettext;   # fake gettext for the IkiWiki old version
@@ -41,22 +41,30 @@ sub checkconfig {
         }
     }
 
-    ## free the old engine if it exists
-    if ($_syntax) {
+    _change_engine( $engine, %{ $engine_parameters{$engine} } );
+
+    return;            
+}
+
+sub _change_engine {
+    my  ($engine_name, %engine_params) = @_;
+
+    # close the old engine 
+    if (defined $_syntax) {
         undef $_syntax;
     }
 
     ## create a reusable object
-    $_syntax = _new_engine( $engine );
+    $_syntax = _new_engine( $engine_name );
 
     if ($_syntax) {
-        $_syntax->logging( sprintf 'using the engine %s', $engine );
+        $_syntax->logging( sprintf 'using the engine %s', $engine_name );
     }
     else {
         error 'could not create a IkiWiki::Plugin::syntax object';
     }
-
-    return;            
+    
+    return $_syntax;
 }
 
 sub _new_engine {
@@ -89,19 +97,26 @@ sub preprocess (@) { #{{{
         @_
     );
 
+    #   engine change ? 
+    if (defined( $params{engine} )) {
+        _change_engine( $params{engine} );
+    }
+
     #   check parameters
     eval {
         _clean_up_parameters( \%params );
     };
 
-    if (my $ex = Syntax::X::Parameters::None->caught()) {
-        # show the plugin info
-        return _info_response();
-    } else {
-        return $_syntax->fail_response( $ex );
+    if ($@) {
+        if (my $ex = Syntax::X::Parameters::None->caught()) {
+            # show the plugin info
+            return _info_response();
+        } else {
+            return $_syntax->fail_response( $ex );
+        }
     }
 
-    $_syntax->logging( 'parsing and formating source' );
+    $_syntax->logging( sprintf 'set language to %s', $params{language} );
 
     ### getting syntax highlight in html format ...  
     eval {
@@ -123,13 +138,18 @@ sub _build_output {
     my  $params_ref =   shift;
     my  $html_text  =   shift;
 
-    template('syntax')->param( 
+    $DB::step = 1;
+
+    my $tmpl = template('syntax.tmpl');
+    
+    $tmpl->param(
             language    =>  $_syntax->language(),
             title       =>  $params_ref->{title},
             description =>  $params_ref->{description},
-            text        =>  $html_text );
+            text        =>  $html_text 
+        );
 
-    return template('syntax')->output(); 
+    return $tmpl->output(); 
 }
 
 sub _clean_up_parameters {
@@ -176,16 +196,21 @@ sub _clean_up_parameters {
         Syntax::X::Parameters::Wrong->throw( 
             gettext( q(could not determine or manage the source language) ));
     }
+    else {
+        # save the language
+        $params_ref->{language} = $_syntax->language();
+    }
 
     return;
 }
 
 sub _info_response {
-    my  %info   =   $_syntax->plugin_info();
+    my  %info       =   $_syntax->plugin_info();
+    my $tmpl        =   template('syntax_info.tmpl');
 
-    template('syntax_info')->param( %info );
+    $tmpl->param( %info );
 
-    return template('syntax_info')->output();
+    return $tmpl->output();
 }
 
 1; 
@@ -292,6 +317,16 @@ odd lines.
 =item force_subpage
 
 Parameter for inline funcion to the source page
+
+=back
+
+=head2 CSS
+
+The package uses the following list of css tags:
+
+=over
+
+=item
 
 =back
 

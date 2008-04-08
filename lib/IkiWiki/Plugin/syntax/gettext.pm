@@ -12,7 +12,7 @@ sub import {
     my  $package    =   (caller) [0];
 
     # try to export a gettext function into the caller's namespace
-    eval "${package}::gettext()";
+    eval "${package}::gettext('')";
 
     if ($@) {
         __PACKAGE__->export_to_level(1, $package, @EXPORT);

@@ -103,7 +103,7 @@ sub template {
     my  $name   =   shift;
 
     if (not defined $tmpl{$name}) {
-        my $filename = sprintf 'extras/%s.tmpl', $name;
+        my $filename = sprintf 'extras/%s', $name;
 
         $tmpl{$name} = HTML::Template->new( filename => $filename, 
                            %tmpl_options );
