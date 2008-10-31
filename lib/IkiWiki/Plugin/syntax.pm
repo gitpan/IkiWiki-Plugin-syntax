@@ -6,12 +6,13 @@ use Carp;
 use utf8;
 use Data::Dumper;
 
-use IkiWiki;
+use IkiWiki 2.00;
+
 use IkiWiki::Plugin::syntax::gettext;   # fake gettext for the IkiWiki old version
 use IkiWiki::Plugin::syntax::Simple;    # the last option
 use IkiWiki::Plugin::syntax::X;
 
-our $VERSION    =   '0.20';
+our $VERSION    =   '0.24';
 our $_syntax    =   undef;
 
 my  %engine_parameters = (
@@ -19,6 +20,7 @@ my  %engine_parameters = (
     'Kate'      =>  undef,
     'Vim'       =>  undef,
 );
+my  $use_template   =   0;
 
 # Module implementation here
 sub import { #{{{
@@ -32,6 +34,9 @@ sub checkconfig {
     ### select an engine from the global ikiwiki configuration
     #
     my  $engine = $IkiWiki::config{syntax_engine} || q(Simple);
+
+    ### Read global parameters ...
+    $use_template = $IkiWiki::config{syntax_use_template} || 0;
 
     # search for special parameters (unused)
     foreach my $engine_name (keys %engine_parameters) {
@@ -85,13 +90,13 @@ sub _new_engine {
 
 sub preprocess (@) { #{{{
     my %params = (
-        language        =>  undef,      ## plugin parameters
+        language        =>  undef,      ### plugin parameters
         description     =>  undef,      #
         text            =>  undef,      #
         file            =>  undef,      #
         linenumbers     =>  0,          #
         formatcomments  =>  0,          ###
-        force_subpage   =>  0,          ##  Ikiwiki parameters
+        force_subpage   =>  0,          ###  Ikiwiki parameters
         page            =>  undef,      #
         destpage        =>  undef,      ###
         @_
@@ -130,26 +135,61 @@ sub preprocess (@) { #{{{
     ### decode to utf-8 ...
     # utf8::decode( $syntax_html );
 
-    ###     build the final text with a template named "syntax"
+    ###     build the final text with a template named "syntax" or joining html
+    #       blocks
     return _build_output( \%params, $_syntax->output() );
 } # }}}
 
 sub _build_output {
     my  $params_ref =   shift;
     my  $html_text  =   shift;
-
-    $DB::step = 1;
-
-    my $tmpl = template('syntax.tmpl');
-    
-    $tmpl->param(
+    my  %params     =   (
             language    =>  $_syntax->language(),
             title       =>  $params_ref->{title},
             description =>  $params_ref->{description},
-            text        =>  $html_text 
+            text        =>  $html_text,
+            url         =>  defined $params_ref->{file} 
+                            ? IkiWiki::urlto( $params_ref->{file}, 
+                                              $params_ref->{page} )
+                            : undef,
         );
 
-    return $tmpl->output(); 
+    if ($use_template) {
+        # take a template reference             
+        my $tmpl = template('syntax.tmpl', default_escape => 0);
+        
+        # set substitutions variables            
+        $tmpl->param( %params );
+
+        # and process ..
+        return $tmpl->output(); 
+    }
+    else {
+        return _manual_output( %params );
+    }
+}
+
+sub _manual_output {
+    my  %params     =   @_;
+    my  @html       =   ();
+
+    if (defined $params{title}) {
+        push(@html, $_syntax->css('title', $params{title}));
+    }
+
+    if (defined $params{url}) {
+        push(@html, $params{url});
+    }
+
+    if (defined $params{text}) {
+        push(@html, sprintf "<pre>\n%s\n</pre>", $params{text} );
+    }
+
+    if (defined $params{description}) {
+        push(@html, $_syntax->css('description', $params{description}));
+    }
+
+    return join("\n", @html);
 }
 
 sub _clean_up_parameters {

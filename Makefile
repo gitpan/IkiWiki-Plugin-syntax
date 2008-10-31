@@ -25,6 +25,7 @@ PERL_CHECK ?= $(PERL) -cw
 PERL_DEBUG ?= $(PERL) -d:ptkdb
 PROVE=$(shell which prove)
 INSTALL=$(shell which install)
+DEBUILD=debuild -uc -us 
 
 #
 #	Do nothing for default
@@ -67,4 +68,4 @@ install:	test binary
 #
 #	Debian package
 deb:	install
-	$(DEBUILD) 
+	cd $(DESTDIR); $(DEBUILD) 

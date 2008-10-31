@@ -1,3 +1,24 @@
+ikiwiki-plugin-syntax (0.24) unstable; urgency=low
+
+  * Add a new global option named syntax_use_template for enable the
+    HTML::Template module. 
+  * Fixed several bugs. 
+
+ -- Victor Moral <victor@taquiones.net>  Fri, 31 Oct 2008 09:42:44 +0100
+
+ikiwiki-plugin-syntax (0.23) unstable; urgency=low
+
+  * Fix a bug with the closed tags in Kate engine.
+
+ -- Victor Moral <victor@taquiones.net>  Wed, 29 Oct 2008 14:33:35 +0100
+
+ikiwiki-plugin-syntax (0.22) unstable; urgency=low
+
+  * Add a new global parameter for not use HTML::Template. By
+    default is disabled.
+
+ -- Victor Moral <victor@taquiones.net>  Wed, 29 Oct 2008 11:28:21 +0100
+
 ikiwiki-plugin-syntax (0.21) unstable; urgency=high
 
   * Add a new test for check direct calls to the plugin functions.

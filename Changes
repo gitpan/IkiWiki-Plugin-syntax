@@ -1,5 +1,12 @@
 Revision history for IkiWiki-Plugin-syntax
 
+0.22 Wed, 29 Oct 2008 11:29:58 +0100
+
+  * Add a new global parameter for not use HTML::Template. By
+    default is disabled.
+
+ -- Victor Moral <victor@taquiones.net>  Wed, 29 Oct 2008 11:28:21 +0100
+
 0.21 Thu, 03 Apr 2008 10:31:03 +0200
 
   * Add a new test for check direct calls to the plugin functions.

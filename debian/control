@@ -4,7 +4,7 @@ Priority: optional
 Build-Depends: debhelper (>= 5.0.0), ikiwiki, libmodule-build-perl, libmodule-build-ikiwiki-perl, libexception-class-perl, liburi-perl, libhtml-parser-perl, libhtml-template-perl, libclass-accessor-perl
 Build-Depends-Indep: perl (>= 5.8)
 Maintainer: Victor Moral <victor@taquiones.net>
-Standards-Version: 3.7.3
+Standards-Version: 3.8.0
 
 Package: ikiwiki-plugin-syntax
 Architecture: all

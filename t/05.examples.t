@@ -22,6 +22,7 @@ my %examples = (
     'function.pl'           =>  'perl',
     'bash.sh'               =>  'bash',
     'fragment.html'         =>  'html',
+    'text.pod'              =>  'pod',
 );
 my @engines = MyTestTools::Engines();
 my %options = (

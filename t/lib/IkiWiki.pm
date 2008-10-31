@@ -120,6 +120,12 @@ sub gettext {
     return shift;
 }
 
+sub urlto {
+    my ($to, $from) = @_;
+
+    return sprintf( "URL from %s to %s", $from || '', $to || '' );
+}
+
 
 1;
 

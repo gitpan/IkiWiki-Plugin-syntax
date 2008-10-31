@@ -23,3 +23,6 @@ pre.syntax {
 .synTitle      { font-weight: bolder; font-size: 80%; }
 .synEvenLine   { font-weight: bold; font-size: 90%; padding: 0 0.3em; background: gray}
 .synOddLine    { font-weight: bold; font-size: 90%; padding: 0 0.3em; }
+
+.synDescription { background: gray; font-size: 80%; width: 80%; }
+

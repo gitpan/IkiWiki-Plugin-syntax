@@ -19,7 +19,7 @@ use IkiWiki::Plugin::syntax::CSS;
 use IkiWiki::Plugin::syntax::X;
 
 ## package variables 
-our $VERSION = '0.1';
+our $VERSION = '0.2';
 
 my  %plugin2external    =   (
     'IkiWiki::Plugin::syntax::Simple'   =>  undef,
@@ -437,31 +437,10 @@ This method produces a HTML text with the original source and the CSS tags.
 A list of every error and warning message that the module
 can generate.
 
-=head1 CONFIGURATION AND ENVIRONMENT
-
-A full explanation of any configuration system(s) used by the module,
-including the names and locations of any configuration files, and the
-meaning of any environment variables or properties that can be set. These
-descriptions must also include details of any configuration language used.
-
-=head1 DEPENDENCIES
-
-A list of all the other modules that this module relies upon, including any
-restrictions on versions, and an indication of whether these required modules
-are part of the standard Perl distribution, part of the module's distribution,
-or must be installed separately.
-
-=head1 INCOMPATIBILITIES
-
-A list of any modules that this module cannot be used in conjunction with.
-This may be due to name conflicts in the interface, or competition for system
-or program resources, or due to internal limitations of Perl (for example, many
-modules that use source code filters are mutually incompatible).
-
 =head1 BUGS AND LIMITATIONS
 
 There are no known bugs in this module.
-Please report problems to <Maintainer name(s)> (<contact address>).
+Please report problems to the author.
 Patches are welcome.
 
 =head1 AUTHOR

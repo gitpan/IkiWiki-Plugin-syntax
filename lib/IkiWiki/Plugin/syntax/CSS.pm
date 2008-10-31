@@ -47,7 +47,7 @@ sub css_pair {
     my  $self       =   shift;      ## unused 
     my  $real_tag   =   shift;
 
-    return ( sprintf '<span class="%s">', $real_tag,
+    return ( sprintf('<span class="%s">', $real_tag),
              sprintf '</span>' );
 }
 

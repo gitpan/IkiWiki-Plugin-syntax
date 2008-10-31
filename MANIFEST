@@ -16,6 +16,7 @@ examples/sources/function.pl
 examples/sources/page.tmpl
 examples/sources/sarajevo.conf
 examples/sources/smart_comments.pl
+examples/sources/text.pod
 extras/syntax.css
 extras/syntax.tmpl
 extras/syntax_info.tmpl
