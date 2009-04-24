@@ -65,7 +65,7 @@ sub __first_line {
     my $self = shift;
     my $program_name = $0 || $self->file();
     my $local_time = localtime($self->time());
-    my $package = $self->package();
+    my $package = $self->package() || __PACKAGE__;
     my $file = $self->file();
     my $line = $self->line();
     my $pid = $self->pid();

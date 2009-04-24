@@ -1,4 +1,5 @@
 .cvsignore
+.gitignore
 Build.PL
 Changes
 debian/changelog
@@ -54,3 +55,4 @@ t/perlcriticrc
 t/pod.t
 t/test.conf
 TODO
+BUGS

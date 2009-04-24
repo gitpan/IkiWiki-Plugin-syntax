@@ -17,3 +17,4 @@ Build$
 debian/files$
 debian/ikiwiki-plugin-syntax
 IkiWiki-Plugin-syntax.*/
+.git/

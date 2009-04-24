@@ -29,7 +29,7 @@ my  %format_table   =   (
     Function        => 'synSpecial',
     IString         => 'synConstant',
     Keyword         => 'synStatement',
-    Normal          => [],
+    Normal          => undef,
     Operator        => 'synConstant',
     Others          => 'synPreProc',
     RegionMarker    => 'synPreProc',
@@ -187,7 +187,7 @@ sub _list_of_supported_syntaxes {
         }
     }
 
-    return sort { uc($a->{language}) cmp uc($b->{language}) } @rlist;
+    return (sort { uc($a->{language}) cmp uc($b->{language}) } @rlist);
 }
 
 sub _add_syntax_info {

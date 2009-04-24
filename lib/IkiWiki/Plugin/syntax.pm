@@ -12,7 +12,7 @@ use IkiWiki::Plugin::syntax::gettext;   # fake gettext for the IkiWiki old versi
 use IkiWiki::Plugin::syntax::Simple;    # the last option
 use IkiWiki::Plugin::syntax::X;
 
-our $VERSION    =   '0.24';
+our $VERSION    =   '0.25';
 our $_syntax    =   undef;
 
 my  %engine_parameters = (
@@ -182,11 +182,11 @@ sub _manual_output {
     }
 
     if (defined $params{text}) {
-        push(@html, sprintf "<pre>\n%s\n</pre>", $params{text} );
+        push(@html, $_syntax->css('syntax', $params{text} ) );
     }
 
     if (defined $params{description}) {
-        push(@html, $_syntax->css('description', $params{description}));
+        push(@html, $_syntax->css('description', $params{description}) );
     }
 
     return join("\n", @html);
@@ -462,18 +462,33 @@ And it recommends:
 
 =head1 BUGS AND LIMITATIONS
 
+Please, see the included file BUGS for a complete list, and report any bugs or
+feature requests to the author.
+
+=head1 FEATURE REQUESTS 
+
 =over 
 
-=item Break the markdown indented chain. It can't be used between paragraphs
-of one list item. Use it after the item text.
+=item Operate on filenames as wikilinks because the current system works as
+pagespecs, and the plugin only operates on a unique page.
+
+Suggested by Steven Black.
 
 =back
-
-Please report any bugs or feature requests to the author.
 
 =head1 AUTHOR
 
 "Víctor Moral"  C<< victor@taquiones.net >>
+
+=head1 CONTRIBUTORS
+
+=over
+
+=item "Steven Black" C<< yam655@gmail.com >> 
+
+=item "Manoj Srivastava"
+
+=back
 
 =head1 LICENCE AND COPYRIGHT
 

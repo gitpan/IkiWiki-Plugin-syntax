@@ -1,6 +1,6 @@
 ---
 name: IkiWiki-Plugin-syntax
-version: 0.24
+version: 0.25
 author:
   - '"Victor Moral" <victor@taquiones.net>'
 abstract: Add syntax highlighting to ikiwiki
@@ -29,7 +29,7 @@ recommends:
 provides:
   IkiWiki::Plugin::syntax:
     file: lib/IkiWiki/Plugin/syntax.pm
-    version: 0.24
+    version: 0.25
   IkiWiki::Plugin::syntax::CSS:
     file: lib/IkiWiki/Plugin/syntax/CSS.pm
     version: 0.1

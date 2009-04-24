@@ -9,14 +9,14 @@ IkiWiki::Plugin::syntax TODO
 
 - Plugin base:
     * Use the IkiWiki private pages feature for better performance.
-    * Add a cache mechanism for some plugins.
+    * Add fine parameters for the engines. 
 
-- Interface to Vim:
+- Vim's interface:
     * Build a mechanism for determine the source language using the filename
       extension.
     * Cache the proposed language.
 
-- Interface to Kate:
+- Kate's interface:
     * Clean the initialization phase.
     * Shorten the supported languages
 

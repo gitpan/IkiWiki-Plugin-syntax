@@ -180,7 +180,7 @@ sub _list_of_supported_syntaxes {
                         description => $syntaxes{$syntax_name} };
     }                    
 
-    return sort { $a->{language} cmp $b->{language} } @rlist;
+    return (sort { $a->{language} cmp $b->{language} } @rlist);
 }
 
 1;

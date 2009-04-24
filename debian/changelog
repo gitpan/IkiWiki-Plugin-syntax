@@ -1,3 +1,11 @@
+ikiwiki-plugin-syntax (0.25) unstable; urgency=low
+
+  * Added a class directive to the code injected into the html. Thanks to
+    Manoj Srivastava for the suggestion.
+  * Fix a warning in the Debian copyright file. 
+
+ -- Victor Moral <victor@taquiones.net>  Fri, 24 Apr 2009 12:01:37 +0200
+
 ikiwiki-plugin-syntax (0.24) unstable; urgency=low
 
   * Add a new global option named syntax_use_template for enable the
